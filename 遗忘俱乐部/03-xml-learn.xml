@@ -1,0 +1,10 @@
+<user>
+    <name>迪丽热巴</name>
+    <age>30</age>
+</user>
+
+
+const user = {
+    name:'迪丽热巴',
+    age:30
+}

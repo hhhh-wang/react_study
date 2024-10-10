@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let formFields = {
+            hosname:undefined,
+            hoscode:undefined,
+            provinceCode:undefined,
+            cityCode:undefined,
+            districtCode:undefined,
+            hostype:undefined,
+            status:0
+        }
+
+        // disabled={true}  formFields对象中的所有的属性值如果都是 undefined 则为真， 但凡有一个不是undefined就为false
+
+        // formFields.hosname === undefined && formFields.cityCode === undefined && ....
+
+        // 获取对象的属性值，放入一个数组中
+        console.log(Object.values(formFields)); // [undefined,undefined,undefined,...]
+
+
+        // every 
+        console.log(Object.values(formFields).every(item=>item === undefined))
+
+    </script>
+</body>
+</html>

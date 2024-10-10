@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name:'yuonly',
+            age:20,
+            sex:'boy',
+            address:'上海'
+        }
+
+        // let name = obj.name;
+        // let age = obj.age;
+        // let sex = obj.sex;
+
+        // 对象的解构赋值，是根据属性名来配对，与位置无关
+        let {age,sex,name} = obj;
+        console.log(age,sex,name);
+
+        let responseData = {
+            code:200,
+            data:{
+                id:1,
+                title:'吃饭',
+                isDone:true
+            }
+        }
+        let {code, data:{id,title}} = responseData
+        console.log(code,id,title);
+
+
+        // 数组的解构: 跟位置有关
+        let arr = [1,2,3,4];
+        let [a,b,c,d] = arr;
+        console.log(b,c);
+
+
+        // 扩展运算 ... 脱衣服      {...obj}   [...arr]
+    </script>
+</body>
+</html>

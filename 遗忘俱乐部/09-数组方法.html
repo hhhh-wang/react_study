@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        /**
+         * 数组方法：
+         * 1. 带回调函数的  [回调函数都是同步的]
+         *    forEach     1 遍历数组 2. 直接在原数组修改数据
+         *    filter      过滤    将原数组中符合条件的保留下来|排除不符合条件的
+         *                有一个原数组，想得到一个新数组，新数组的长度比原数组短，考虑使用filter可能合适
+         *    map   【映射】 需要得到一个新数组，新数组的长度如果跟原数组一样，考虑使用map
+         *    reduce:  累加
+         *    some：   有一个为真即为真，全部为假才为假
+         *    every：  每一个都是真才为真，有一个为假即为假
+         *    find：
+         *    findIndex：
+         * 
+         * 2. 改变原数组的  7 个
+         *    pop
+         *        作用：从数组的末尾删除元素
+         *        return 被删除的元素
+         *    push 
+         *        作用：从数组的末尾添加元素
+         *        return 新数组的长度
+         *    shift
+         *        作用：从数组的前面删除元素
+         *        return 被删除的元素
+         *    unshift
+         *        作用：从数组的前面添加元素
+         *        return 新数组的长度
+         *    sort
+         *        作用： 排序
+         *        return 排序后的数组
+         *    reserve
+         *        作用： 翻转数组
+         *        return 反转后的数组
+         *    splice
+         *        作用：数组元素的增删改查
+         *        添加：arr.splice(index,0,新增的元素)
+         *        删除：arr.splice(index,删除个数)
+         *        替换：arr.splice(index,1,替换元素)
+         * 
+         * 3. 特殊的
+         *    join   常用 字符串 split 方法配合使用
+         *    slice： 截取数组   arr.slice(starIndex, endIndex)   索引可以是负数
+         *            从头开始截取数组，截取到后两个元素  arr.slice(0,-2)
+         *            特殊应用：
+         *            1. 复制一个数组
+         *            2. 将类数组转化为普通数组  Array.prototype.slice.call(要转化的类数组)
+         *    concat
+         *           
+         *    indexOf
+         *    includes
+         * 
+         */
+
+
+        // 1. forEach
+        let arr = [{ id: 1, username: 'atguigu' }, { id: 2, username: 'yuonly' }]
+
+        console.log(111)
+        arr.forEach(item => {
+            console.log(222);
+            if (item.id === 2) {
+                item.username = '迪丽热巴'
+            }
+        })
+        console.log(333);
+        console.log(arr);
+
+        console.log('start')
+        setTimeout(() => {
+            console.log('content');
+        })
+        console.log('end');
+
+        // 2. filter 过滤
+        /**
+         * 会返回一个过滤后的新数组
+         */
+        let todos = [ // 待办事项的列表
+            {
+                id: 1,
+                title: '吃饭',
+                isDone: true
+            },
+            {
+                id: 2,
+                title: '睡觉',
+                isDone: false
+            },
+            {
+                id: 3,
+                title: '学习',
+                isDone: false
+            }
+        ]
+        // 需求删除已完成的待办事项 ==》 就是保留isDone是false 保留未完成的
+
+        let newTodos = todos.filter(todo => {
+            //return false;// newTodos []
+            //return true; // newTodos 跟 todos 一样
+            return !todo.isDone
+        })
+        console.log(newTodos);
+
+        // 3. map 【映射】
+        /**
+         * return  也是一个新数组
+         * 
+         */
+
+        let todoList = [
+            {
+                id: 1,
+                title: '吃饭',
+                isDone: true
+            },
+            {
+                id: 2,
+                title: '睡觉',
+                isDone: false
+            },
+            {
+                id: 3,
+                title: '学习',
+                isDone: false
+            }
+        ]
+
+        let newTodoList = todoList.map(todo => {
+            todo.isDone = true;
+            return todo;
+        })
+
+        console.log(newTodoList);
+
+        // 4. reduce
+        let nums = [{ age: 10 }, { age: 7 }, { age: 3 }];
+        // 需求：将年龄累加到一起
+        let total = nums.reduce((pre, cur, index) => {
+            //  次数   pre                cur        index      return
+            //   1.    reduce第二个参数   当前元素   当前索引    undefined
+            //   2.    取上一次的返回值
+            //   3.
+            //   ..                                             最后一个次的返回值就是 reduce的返回值
+            // console.log('pre: ', pre);
+            // console.log('cur: ', cur);
+            // console.log('index: ', index);
+            return pre + cur.age
+            // 1   0    {age:10}    return  10
+            // 2   10   {age:7}     return  10 + 7
+            // 3   17   {age:3}     return  17 + 3
+        }, 0)
+        console.log(total);
+
+
+        let todoList1 = [
+            {
+                id: 1,
+                title: '吃饭',
+                isDone: true
+            },
+            {
+                id: 2,
+                title: '睡觉',
+                isDone: true
+            },
+            {
+                id: 3,
+                title: '学习',
+                isDone: true
+            }
+        ]
+        // 需求：计算已完成代办事项的数量
+        let doneNum = todoList1.reduce((pre, cur) => {
+            // return pre + (cur.isDone ? 1 : 0)
+            return pre + cur.isDone
+        }, 0)
+
+        let doneNum2 = todoList1.reduce((pre, cur) => pre + cur.isDone, 0);
+        console.log(doneNum2);
+
+
+        // 5. find : 查找数组中符合条件的第一个元素，返回值是找到的元素
+        let goodsList = [
+            {
+                id: 1,
+                gname: '华为手机',
+                price: 20
+            },
+            {
+                id: 2,
+                gname: '小米手机',
+                price: 1999
+            },
+            {
+                id: 1,
+                gname: '苹果手机',
+                price: 3999
+            }
+        ]
+        let item = goodsList.find(goods => {
+            return goods.id === 1
+        })
+        console.log(item);
+        // findIndex 找到第一个符合条件的索引
+        let index = goodsList.findIndex(goods => {
+            return goods.id === 1
+        })
+        console.log('index: ', index);
+
+        // 将id是2 的price 价格 + 200
+        console.log(goodsList.map(item => {
+            if (item.id === 2) {
+                item.price += 200
+            }
+            return item;
+        }))
+
+        let index2 = goodsList.findIndex(goods => {
+            return goods.id === 2
+        })
+
+        goodsList[index2].price += 200;
+        console.log(goodsList);
+
+        let obj = goodsList.find(item => {
+            return item.id === 2;
+        })
+        obj.price += 200;
+        console.log(goodsList);
+
+
+        // pop
+        let arr3 = [1, 2, 3, 'a'];
+        let res1 = arr3.pop();
+        console.log(res1);
+
+        // push 
+        console.log(['a', 'b', 'c'].push(3))
+
+
+        // slice 特殊应用：
+        // 1. 复制一个数组
+        let arr5 = [1, 2, 5, 7];
+        let arr6 = arr5.slice(0);
+        console.log(arr5, arr6, arr5 === arr6);
+        // concat 复制数组
+        let arr7 = arr5.concat([]);
+        console.log(arr5,arr7, arr5===arr7);
+        // 解构
+        let arr8 = [...arr5];
+        console.log(arr5, arr8, arr5===arr8);
+
+        // slice 特殊应用，将类数组[伪]转化为普通数组
+        // 伪数组：有长度有索引，但是不能使用数组的方法
+        let lis = document.querySelectorAll('li');
+        console.log('lis: ',lis);
+        // lis.push(3); // 伪数组，不能使用数组方法
+
+        let newLis = Array.prototype.slice.call(lis);
+        console.log('newLis: ', newLis);
+        newLis.push(6)
+        console.log(newLis);
+
+
+        // indexOf   includes 都是可以实现 查找一个元素是否在数组中
+        /**
+         * indexOf 如果有返回对应的索引，如果没有返回 -1 
+         * 
+         * includes:[es7] 如果有返回布尔值 true，没有返回 false
+         */
+        let carList = [1,7,5,3]
+
+        let res = carList.indexOf(1);
+        console.log(res);
+
+        console.log(carList.includes(11));
+
+
+
+
+    </script>
+</body>
+
+</html>

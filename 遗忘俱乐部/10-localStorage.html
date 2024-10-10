@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 存
+        // localStorage.setItem('todos','123123');
+
+        // 读
+        // let res = localStorage.getItem('todos')
+        // console.log(res);
+
+        // 删
+        // localStorage.removeItem('todos')
+
+        // let todos = [
+        //     {
+        //         id:1,
+        //         title:'吃饭',
+        //         isDone:false
+        //     }
+        // ]
+
+        // localStorage.setItem('todos', todos); // [object Object]
+
+        // let res = localStorage.getItem('todos')
+        // console.log(res, typeof res);
+
+
+            
+        // let todos = [
+        //     {
+        //         id:1,
+        //         title:'吃饭',
+        //         isDone:false
+        //     }
+        // ]
+
+        // localStorage.setItem('todos', JSON.stringify(todos))
+
+        let res = localStorage.getItem('todos');
+        console.log(res, typeof res);
+
+        let todos = JSON.parse(res);
+        console.log(todos, typeof todos);
+
+        let res2 = JSON.parse(localStorage.getItem('kjfklsdfjk'))
+        console.log(res2);
+    </script>
+</body>
+</html>

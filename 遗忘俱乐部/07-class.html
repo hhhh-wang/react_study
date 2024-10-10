@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            state = {
+                name: 'atguigu',
+                age: 10
+            }
+            // constructor() {
+            //     this.state = {
+            //         name: 'atguigu',
+            //         age: 10
+            //     }
+            // }
+            // say在Person的原型对象上
+            say() {
+                // console.log('say name:', this.state.name);
+                // console.log('say age: ', this.state.age);
+                console.log('say this: ', this);
+            }
+            // 实例化对象身上， 
+            eat = () => {
+                // console.log('eat name:', this.state.name);
+                console.log('eat this: ', this);
+            }
+            //当我们直接赋值时，其实相当于是在 constructor构造函数中执行的
+            // constructor(){
+            //     this.eat = ()=>{// 箭头函数没有this，箭头函数的this指向由定义时所在作用域决定
+            //         // 因此 eat中的this，一出生就跟 constructor中的this一致了，跟在哪里调用，谁调用无关。构造函数中的this永远执行当前实例对象
+            //         console.log('eat this: ', this);
+            //     }
+            // }
+        }
+
+        let p1 = new Person();
+        p1.say();
+        p1.eat();
+
+        let p2 = new Person();
+
+        console.log(p1.say === p2.say);// true 说明是在原型对象上
+        console.log(p1.eat === p2.eat);// false 说明每一个实例对象都有一个自己的eat方法
+
+
+        let obj = {
+            name: 'atguigu',
+            f1: p1.say,// say是一个普通方法，普通方法中的this，由调用者决定
+            f2: p1.eat
+        }
+
+        // obj.f1();// f1 也就是 say方法中的this是 obj
+        obj.f2();// this仍然是 当前类的实例对象
+
+
+    </script>
+</body>
+
+</html>
