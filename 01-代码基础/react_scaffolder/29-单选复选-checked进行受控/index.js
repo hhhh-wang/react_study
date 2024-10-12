@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client'; // react-dom/client
+// 通过import语法导入
+// import 'bootstrap/dist/css/bootstrap.min.css'
 // 导入App根组件
 import App from './App';
-// 导入全局重置样式
-import './index.css'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <App />
