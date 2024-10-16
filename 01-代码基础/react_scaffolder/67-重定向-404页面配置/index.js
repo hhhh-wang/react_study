@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// 2. 导入BrowserRouter
+import { BrowserRouter } from 'react-router-dom'
 // 导入App根组件
 import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    // 3. 包裹App根组件
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 );
